@@ -3,7 +3,7 @@ import React, { useRef, useMemo } from "react";
 import { useFrame } from "@react-three/fiber";
 import Random from "canvas-sketch-util/random";
 
-export default function Particles({ count }) {
+export default function Particles({ count, color }) {
   const mesh = useRef();
   const light = useRef();
 
@@ -13,7 +13,7 @@ export default function Particles({ count }) {
     for (let i = 0; i < count; i++) {
       const time = Random.range(0, 100);
       const factor = Random.range(20, 120);
-      const speed = Random.range(0.01, 0.015) / 2;
+      const speed = Random.range(0.01, 0.015) / 4;
       const x = Random.range(-50, 50);
       const y = Random.range(-50, 50);
       const z = Random.range(-50, 50);
@@ -59,7 +59,7 @@ export default function Particles({ count }) {
       <pointLight ref={light} distance={40} intensity={5} />
       <instancedMesh ref={mesh} args={[null, null, count]}>
         <dodecahedronBufferGeometry args={[0.2, 0]} />
-        <meshPhongMaterial color="#2EA44E" />
+        <meshPhongMaterial color={color} />
       </instancedMesh>
     </>
   );
