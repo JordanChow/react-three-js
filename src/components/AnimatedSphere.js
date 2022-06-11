@@ -4,7 +4,6 @@ import {
   GradientTexture,
   MeshDistortMaterial,
 } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
 
 export default function AnimatedSphere({
   args,
@@ -12,15 +11,10 @@ export default function AnimatedSphere({
   color,
   distort,
   speed,
-  handleSphere,
+  handleSphereClick,
 }) {
-  const sun = useRef();
-  useFrame(() => {
-    sun.current.rotation.z += 0.01;
-  });
-
   return (
-    <mesh ref={sun} onClick={handleSphere}>
+    <mesh onClick={handleSphereClick}>
       <Sphere visible args={args} position={position}>
         <MeshDistortMaterial distort={distort} speed={speed}>
           <GradientTexture stops={[0, 1]} colors={color} size={1024} />
