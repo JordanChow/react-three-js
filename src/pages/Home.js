@@ -7,15 +7,6 @@ import { OrbitControls, Text } from "@react-three/drei";
 import randomColor from "randomcolor";
 import { useNavigate } from "react-router-dom";
 
-const styles = {
-  canvas: {
-    position: "absolute",
-    background: "black",
-    width: "100%",
-    height: "100%",
-  },
-};
-
 const EnvironmentSetup = () => {
   return (
     <>
@@ -37,6 +28,24 @@ export default function Home() {
   const navigation = useNavigate();
   const [cubeHovered, setCubeHovered] = useState(false);
 
+  const styles = {
+    canvas: {
+      position: "absolute",
+      background: "black",
+      width: "100%",
+      height: "100%",
+    },
+    title: {
+      backgroundImage: "-webkit-linear-gradient(0deg, #66EB73, #649CD9)",
+      WebkitBackgroundClip: "text",
+      WebkitTextFillColor: "transparent",
+      fontFamily: "Inter",
+      visibility: cubeHovered ? "visible" : "hidden",
+      textAlign: "center",
+      letterSpacing: "3px",
+    },
+  };
+
   const handleSphereClick = () => {
     navigation("/");
   };
@@ -47,22 +56,8 @@ export default function Home() {
 
   return (
     <>
-      {
-        <div
-          style={{
-            color: "red",
-            visibility: cubeHovered ? "visible" : "hidden",
-          }}
-        >
-          about
-        </div>
-      }
+      <h1 style={styles.title}>ABOUT</h1>
       <Canvas style={styles.canvas}>
-        {cubeHovered && (
-          <Text scale={[2, 2, 2]} position={[1, 2.5, 0]} color="white">
-            about
-          </Text>
-        )}
         <EnvironmentSetup />
         <Particles count={5000} color={"#191919"} />
         <AnimatedCube
